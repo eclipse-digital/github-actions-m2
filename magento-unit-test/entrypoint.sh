@@ -11,10 +11,10 @@ test -z "${VENDOR_NAME}" && (echo "'VENDOR_NAME' is not set" && exit 1)
 test -z "${MAGENTO_VERSION}" && (echo "'MAGENTO_VERSION' is not set" && exit 1)
 test -z "${MAGENTO_VERSION_TYPE}" && (echo "'MAGENTO_VERSION_TYPE' is not set" && exit 1)
 
-if [[ "${SATIS}" == "true" ]] ; then
-  test -z "${SATIS_REPO}" && (echo "'SATIS_REPO' is not set" && exit 1)
-  test -z "${SATIS_LOGIN}" && (echo "'SATIS_LOGIN' is not set" && exit 1)
-  test -z "${SATIS_PASSWORD}" && (echo "'SATIS_PASSWORD' is not set" && exit 1)
+if [[ "${PRIVATE_PACKEGIST}" == "true" ]] ; then
+  test -z "${PRIVATE_REPO}" && (echo "'PRIVATE_REPO' is not set" && exit 1)
+  test -z "${PRIVATE_LOGIN}" && (echo "'PRIVATE_LOGIN' is not set" && exit 1)
+  test -z "${PRIVATE_PASSWORD}" && (echo "'PRIVATE_PASSWORD' is not set" && exit 1)
 fi
 #Script const
 MG_REPOSITORY_URL='https://repo.magento.com/'
@@ -22,8 +22,8 @@ PROJECT_PATH=$GITHUB_WORKSPACE
 
 composer global config http-basic.repo.magento.com $MARKETPLACE_LOGIN $MARKETPLACE_PASSWORD
 
-if [[ "${SATIS}" == "true" ]] ; then
-composer global config http-basic.$SATIS_REPO $SATIS_LOGIN $SATIS_PASSWORD
+if [[ "${PRIVATE_PACKEGIST}" == "true" ]] ; then
+composer global config http-basic.PRIVATE_REPO $PRIVATE_LOGIN $PRIVATE_PASSWORD
 fi
 
 #Logic
@@ -57,3 +57,4 @@ php $WEB_DIR/vendor/phpunit/phpunit/phpunit \
  -c $WEB_DIR/dev/tests/unit/phpunit.xml \
  --colors=always \
  $WEB_DIR/app/code/$VENDOR_NAME/$MODULE_NAME/Test/Unit/
+

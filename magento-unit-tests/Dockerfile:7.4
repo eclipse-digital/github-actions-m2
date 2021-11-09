@@ -1,6 +1,6 @@
 FROM php:7.4
 
-COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 RUN apt-get update && apt-get -y install \
     mariadb-client \
@@ -19,17 +19,8 @@ RUN apt-get update && apt-get -y install \
     libxslt-dev \
     netcat
 
-RUN docker-php-ext-install pdo pdo_mysql
-RUN docker-php-ext-install xsl
-RUN docker-php-ext-install soap
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-RUN docker-php-ext-install -j$(nproc) gd
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install sodium
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install intl
-RUN docker-php-ext-install sockets
-RUN composer global require hirak/prestissimo
+RUN docker-php-ext-install pdo pdo_mysql xsl soap -j$(nproc) gd bcmath sodium zip intl sockets
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
