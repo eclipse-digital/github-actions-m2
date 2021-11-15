@@ -1,0 +1,38 @@
+name: 'Magento 2 unit tests'
+author: 'Taurthil'
+description: 'runs unit tests for given Magento 2 open source version and commerce'
+inputs:
+  module_name:
+    description: 'Your Magento module name. Example: Foo_Bar'
+    required: true
+  composer_name:
+    description: 'Your composer name. Example: foo/bar'
+    required: true
+  php_version:
+    description: 'PHP version'
+    required: true
+    default: '7.4'
+  magento_version_type:
+    description: 'Magento OS || CE'
+    required: true
+    default: 'OS'
+  magento_version:
+    description: 'Magento 2 version number'
+    required: true
+    default: '2.4.2'
+  module_source:
+    description: 'Relative path to your module source within your repository. Empty by default.'
+  phpunit_file:
+    description: 'Relative path to your own PHPUnit file. Leave empty to use the default.'
+  magento_pre_install_script:
+    description: 'Relative path to an optional script before Magento installation is run. Leave empty to use the default.'
+  additional_repository:
+    description: 'Additional repository e.g. Satis'
+    required: true
+    default: 'false'
+runs:
+  using: 'docker'
+  image: 'docker://mageviper/magento-unit-tests'
+branding:
+  icon: 'code'
+  color: 'green'

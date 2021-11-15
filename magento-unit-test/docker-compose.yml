@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+    unit-test:
+        image: mageviper/magento-unit-tests:7.4
+        environment:
+            MARKETPLACE_LOGIN:    d2e6266bda3f5e3e7cbaf6a364f088cb
+            MARKETPLACE_PASSWORD: 183eed8a76893dd2c4e7b4cf201d7abc
+            VENDOR_NAME:          Eclipse
+            MODULE_NAME:          Importer
+            MAGENTO_VERSION:      '2.4.2'
+            MAGENTO_VERSION_TYPE: CE
+            SATIS:                'false'
